@@ -57,7 +57,7 @@
     <build>
         <plugins>
 
-            <!-- Executar Runner JUnit -->
+            <!-- Executa o Runner JUnit -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -69,16 +69,17 @@
                 </configuration>
             </plugin>
 
-            <!-- RELATÓRIO HTML DO CUCUMBER (OK) -->
+            <!-- Relatório HTML Cucumber -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
                 <version>5.7.0</version>
+
                 <executions>
                     <execution>
                         <id>generate-report</id>
 
-                        <!-- FASE CORRETA PARA EVITAR APAGAR O JSON -->
+                        <!-- GARANTE que o relatório só é gerado DEPOIS DOS TESTES -->
                         <phase>post-integration-test</phase>
 
                         <goals>
@@ -88,14 +89,13 @@
                         <configuration>
                             <projectName>Sisgcorp Automação</projectName>
 
-                            <!-- ONDE O JSON É GERADO -->
+                            <!-- JSON GERADO PELO RUNNER -->
                             <jsonFiles>
                                 <param>${project.build.directory}/cucumber.json</param>
                             </jsonFiles>
 
-                            <!-- ONDE O RELATÓRIO SERÁ GERADO -->
+                            <!-- RELATÓRIO FINAL HTML -->
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-
                         </configuration>
                     </execution>
                 </executions>
