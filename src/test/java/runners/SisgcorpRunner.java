@@ -6,14 +6,15 @@ import io.cucumber.junit.CucumberOptions;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
-        features = "classpath:features",
-        glue = {"steps", "utils"},
+        features = "src/test/resources/features",
+        glue = {"steps", "support"},
         plugin = {
                 "pretty",
-                "json:target/cucumber.json"
+                "json:target/cucumber-reports/cucumber.json",
+                "html:target/cucumber-reports/html-report"
         },
-        monochrome = true
+        monochrome = true,
+        snippets = CucumberOptions.SnippetType.CAMELCASE
 )
 public class SisgcorpRunner {
-
 }
