@@ -13,15 +13,19 @@ pipeline {
             }
         }
 
-        stage('Build & Test') {
+        stage('Run Tests') {
             steps {
-                bat 'mvn clean test'
+                dir('.') {
+                    bat 'mvn clean test'
+                }
             }
         }
 
         stage('Generate Cucumber Report') {
             steps {
-                bat 'mvn verify'
+                dir('.') {
+                    bat 'mvn verify -DskipTests'
+                }
             }
         }
 
