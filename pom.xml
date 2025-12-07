@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <!-- COMPATÍVEL COM O JDK 17 DO JENKINS -->
+        <!-- Compatível com JDK 17 -->
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -34,7 +34,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dependência complementar do Cucumber -->
+        <!-- Cucumber Core -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
@@ -64,6 +64,13 @@
             <version>5.9.2</version>
         </dependency>
 
+        <!-- Necessário para o plugin de relatório HTML -->
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>cucumber-reporting</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+
     </dependencies>
 
     <build>
@@ -78,14 +85,40 @@
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
+
+                    <!-- Gera o cucumber.json automaticamente -->
+                    <systemPropertyVariables>
+                        <cucumber.plugin>pretty, json:target/cucumber.json</cucumber.plugin>
+                    </systemPropertyVariables>
+
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
+            </plugin>
+
+            <!-- Plugin para gerar relatório HTML do Cucumber -->
+            <plugin>
+                <groupId>net.masterthought</groupId>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.0</version>
+                <executions>
+                    <execution>
+                        <id>generate-cucumber-html-report</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <projectName>Automação SISGCORP</projectName>
+                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+                            <jsonFiles>
+                                <param>${project.build.directory}/cucumber.json</param>
+                            </jsonFiles>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
         </plugins>
     </build>
 
 </project>
-
-
-
