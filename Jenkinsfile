@@ -7,25 +7,22 @@ pipeline {
     }
 
     stages {
+
         stage('Checkout') {
             steps {
                 checkout scm
             }
         }
 
-        stage('Run Tests') {
+        stage('Run Tests (Generate JSON)') {
             steps {
-                dir('.') {
-                    bat 'mvn clean test'
-                }
+                bat 'mvn clean test'
             }
         }
 
         stage('Generate Cucumber Report') {
             steps {
-                dir('.') {
-                    bat 'mvn verify -DskipTests'
-                }
+                bat 'mvn verify'
             }
         }
 
