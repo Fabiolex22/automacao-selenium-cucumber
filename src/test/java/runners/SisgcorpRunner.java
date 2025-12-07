@@ -10,9 +10,10 @@ import io.cucumber.junit.CucumberOptions;
         glue = {"steps", "utils"},
         plugin = {
                 "pretty",
-                "json:target/cucumber.json"  // <- AGORA SÓ ESTE
+                "json:target/cucumber.json"
         },
         monochrome = true
 )
-public class SisgcorpRunner {}
-k
+public class SisgcorpRunner {
+
+}
