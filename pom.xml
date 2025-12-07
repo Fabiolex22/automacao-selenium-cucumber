@@ -64,7 +64,7 @@
             <version>5.9.2</version>
         </dependency>
 
-        <!-- Necessário para o plugin de relatório HTML -->
+        <!-- Plugin de Relatório HTML -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
@@ -76,7 +76,7 @@
     <build>
         <plugins>
 
-            <!-- Surefire para executar o Runner do Cucumber -->
+            <!-- Runner do Cucumber via Surefire -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -86,7 +86,7 @@
                         <include>**/*Runner.java</include>
                     </includes>
 
-                    <!-- Gera o cucumber.json automaticamente -->
+                    <!-- Gerar JSON automaticamente -->
                     <systemPropertyVariables>
                         <cucumber.plugin>pretty, json:target/cucumber.json</cucumber.plugin>
                     </systemPropertyVariables>
@@ -95,7 +95,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Plugin para gerar relatório HTML do Cucumber -->
+            <!-- Gerar Relatório HTML após os testes -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
@@ -103,7 +103,10 @@
                 <executions>
                     <execution>
                         <id>generate-cucumber-html-report</id>
-                        <phase>verify</phase>
+
+                        <!-- FASE CORRETA PARA O JENKINS -->
+                        <phase>post-integration-test</phase>
+
                         <goals>
                             <goal>generate</goal>
                         </goals>
@@ -122,6 +125,3 @@
     </build>
 
 </project>
-
-
-
