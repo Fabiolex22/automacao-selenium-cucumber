@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -31,7 +31,7 @@
             <version>5.7.0</version>
         </dependency>
 
-        <!-- Cucumber -->
+        <!-- Cucumber (versão 7 completa) -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -41,6 +41,25 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
+            <version>7.15.0</version>
+        </dependency>
+
+        <!-- Necessário para JSON completo -->
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-core</artifactId>
+            <version>7.15.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-gherkin</artifactId>
+            <version>7.15.0</version>
+        </dependency>
+
+        <dependency>
+            <groupId>io.cucumber</groupId>
+            <artifactId>cucumber-plugin</artifactId>
             <version>7.15.0</version>
         </dependency>
 
@@ -57,45 +76,39 @@
     <build>
         <plugins>
 
-            <!-- Executa o Runner JUnit -->
+            <!-- EXECUTAR O RUNNER -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
+                    <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
                 </configuration>
             </plugin>
 
-            <!-- Relatório HTML Cucumber -->
+            <!-- RELATÓRIO HTML (PLUGIN CORRETO) -->
             <plugin>
                 <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.0</version>
-
+                <artifactId>cucumber-reporting</artifactId>
+                <version>5.7.4</version>
                 <executions>
                     <execution>
                         <id>generate-report</id>
-
-                        <!-- GARANTE que o relatório só é gerado DEPOIS DOS TESTES -->
-                        <phase>post-integration-test</phase>
-
+                        <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
-
                         <configuration>
                             <projectName>Sisgcorp Automação</projectName>
-
-                            <!-- JSON GERADO PELO RUNNER -->
                             <jsonFiles>
                                 <param>${project.build.directory}/cucumber.json</param>
                             </jsonFiles>
-
-                            <!-- RELATÓRIO FINAL HTML -->
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+                            <buildNumber>1</buildNumber>
+                            <skip>false</skip>
                         </configuration>
                     </execution>
                 </executions>

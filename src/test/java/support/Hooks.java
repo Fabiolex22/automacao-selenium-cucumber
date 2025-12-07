@@ -1,20 +1,26 @@
-package support;
+package steps;
 
 import io.cucumber.java.After;
 import io.cucumber.java.Before;
+import org.openqa.selenium.WebDriver;
 import utils.DriverFactory;
 
 public class Hooks {
 
+    private WebDriver driver;
+
     @Before
     public void setup() {
+        driver = DriverFactory.getDriver();
         System.out.println("Iniciando driver...");
-        DriverFactory.getDriver(); // garante que o driver inicia no começo do teste
     }
 
     @After
     public void tearDown() {
-        System.out.println("Finalizando driver...");
-        DriverFactory.killDriver(); // fecha o navegador de verdade
+        if (driver != null) {
+            System.out.println("Fechando driver...");
+            driver.quit();
+            DriverFactory.killDriver();
+        }
     }
 }
