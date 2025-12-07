@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -24,24 +24,31 @@
             <version>4.24.0</version>
         </dependency>
 
+        <!-- WebDriver Manager -->
+        <dependency>
+            <groupId>io.github.bonigarcia</groupId>
+            <artifactId>webdrivermanager</artifactId>
+            <version>5.7.0</version>
+        </dependency>
+
         <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.18.1</version>
+            <version>7.15.0</version>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.18.1</version>
+            <version>7.15.0</version>
         </dependency>
 
-        <!-- WebDriver Manager (opcional, mas ajuda muito) -->
         <dependency>
-            <groupId>io.github.bonigarcia</groupId>
-            <artifactId>webdrivermanager</artifactId>
-            <version>5.8.0</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.13.2</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>
@@ -49,36 +56,40 @@
     <build>
         <plugins>
 
-            <!-- Surefire (necessário para rodar o Runner) -->
+            <!-- Suportar Runner JUnit -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <includes>
-                        <include>**/*Runner*.java</include>
+                        <include>**/*Runner.java</include>
                     </includes>
                 </configuration>
             </plugin>
 
-            <!-- Plugin do relatório Cucumber -->
+            <!-- Relatório HTML (Cucumber Reporting) -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
                 <version>5.7.0</version>
                 <executions>
                     <execution>
-                        <id>report</id>
+                        <id>generate-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>Relatorio Cucumber</projectName>
-                            <outputDirectory>target</outputDirectory>
+                            <projectName>Sisgcorp Automação</projectName>
+
+                            <!-- LOCAL DO JSON -->
                             <jsonFiles>
-                                <param>target/cucumber.json</param>
+                                <param>${project.build.directory}/cucumber.json</param>
                             </jsonFiles>
+
+                            <!-- SAÍDA DO RELATÓRIO -->
+                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
