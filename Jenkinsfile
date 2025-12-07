@@ -29,10 +29,10 @@ pipeline {
         stage('Publicar Relatórios') {
             steps {
 
-                // PUBLICAR O HTML DO CUCUMBER
+                // PUBLICAR O RELATÓRIO HTML DO CUCUMBER
                 publishHTML(target: [
                     reportDir: 'target',
-                    reportFiles: 'cucumber-html-report.html',
+                    reportFiles: 'cucumber-report.html',
                     reportName: 'Relatório Cucumber',
                     keepAll: true,
                     alwaysLinkToLastBuild: true

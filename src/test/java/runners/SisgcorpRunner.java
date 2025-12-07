@@ -10,11 +10,13 @@ import io.cucumber.junit.CucumberOptions;
         glue = {"steps"},
         plugin = {
                 "pretty",
-                "summary",
+                "html:target/cucumber-report.html",
                 "json:target/cucumber.json",
-                "html:target/cucumber-html-report.html"
+                "timeline:target/timeline",
+                "summary"
         },
-        monochrome = true
+        monochrome = true,
+        publish = false
 )
 public class SisgcorpRunner {
 }

@@ -31,7 +31,7 @@
             <version>5.7.0</version>
         </dependency>
 
-        <!-- Cucumber (versão 7 completa) -->
+        <!-- Cucumber 7 -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -41,25 +41,6 @@
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.15.0</version>
-        </dependency>
-
-        <!-- Necessário para JSON completo -->
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-core</artifactId>
-            <version>7.15.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-gherkin</artifactId>
-            <version>7.15.0</version>
-        </dependency>
-
-        <dependency>
-            <groupId>io.cucumber</groupId>
-            <artifactId>cucumber-plugin</artifactId>
             <version>7.15.0</version>
         </dependency>
 
@@ -82,18 +63,18 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
+                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
 
-            <!-- RELATÓRIO HTML (PLUGIN CORRETO) -->
+            <!-- RELATÓRIO HTML FUNCIONANDO -->
             <plugin>
                 <groupId>net.masterthought</groupId>
-                <artifactId>cucumber-reporting</artifactId>
-                <version>5.7.4</version>
+                <artifactId>maven-cucumber-reporting</artifactId>
+                <version>5.7.8</version>
                 <executions>
                     <execution>
                         <id>generate-report</id>
@@ -103,12 +84,12 @@
                         </goals>
                         <configuration>
                             <projectName>Sisgcorp Automação</projectName>
+                            <outputDirectory>
+                                ${project.build.directory}/cucumber-html-reports
+                            </outputDirectory>
                             <jsonFiles>
                                 <param>${project.build.directory}/cucumber.json</param>
                             </jsonFiles>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <buildNumber>1</buildNumber>
-                            <skip>false</skip>
                         </configuration>
                     </execution>
                 </executions>
