@@ -70,25 +70,23 @@
                 </configuration>
             </plugin>
 
-            <!-- RELATÓRIO HTML FUNCIONANDO -->
+            <!-- RELATÓRIO CUCUMBER HTML -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.8</version>
+                <version>5.7.0</version>
                 <executions>
                     <execution>
-                        <id>generate-report</id>
+                        <id>generate-cucumber-html-report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>Sisgcorp Automação</projectName>
-                            <outputDirectory>
-                                ${project.build.directory}/cucumber-html-reports
-                            </outputDirectory>
+                            <projectName>Relatorio SISGCORP</projectName>
+                            <outputDirectory>target/cucumber-html-reports</outputDirectory>
                             <jsonFiles>
-                                <param>${project.build.directory}/cucumber.json</param>
+                                <param>target/cucumber.json</param>
                             </jsonFiles>
                         </configuration>
                     </execution>
