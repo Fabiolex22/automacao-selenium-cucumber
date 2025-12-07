@@ -9,14 +9,15 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
+        <!-- JAVA 17 (ideal para Jenkins + Selenium) -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <dependencies>
 
-        <!-- Cucumber + Java -->
+        <!-- Cucumber Java -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -24,7 +25,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Cucumber + JUnit -->
+        <!-- Cucumber JUnit -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
@@ -32,7 +33,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JUnit 4 (necessário para @RunWith) -->
+        <!-- JUnit 4 necessário para @RunWith -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -51,7 +52,18 @@
 
     <build>
         <plugins>
-            <!-- Plugin para rodar testes com Maven e gerar relatório -->
+
+            <!-- Compilação Java 17 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.11.0</version>
+                <configuration>
+                    <release>17</release>
+                </configuration>
+            </plugin>
+
+            <!-- SUREFIRE -> Executa apenas arquivos *Runner.java -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -62,6 +74,7 @@
                     </includes>
                 </configuration>
             </plugin>
+
         </plugins>
     </build>
 
