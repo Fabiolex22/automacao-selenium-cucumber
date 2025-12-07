@@ -11,12 +11,9 @@ import io.cucumber.junit.CucumberOptions;
         plugin = {
                 "pretty",
                 "html:target/cucumber-report.html",
-                "json:target/cucumber.json",
-                "timeline:target/timeline",
-                "summary"
+                "json:target/cucumber.json"
         },
-        monochrome = true,
-        publish = false
+        monochrome = true
 )
 public class SisgcorpRunner {
 }

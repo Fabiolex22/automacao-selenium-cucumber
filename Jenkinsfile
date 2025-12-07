@@ -20,12 +20,15 @@ pipeline {
             }
         }
 
-        // Removido: gerar relatório HTML (pois não existe mais no POM)
-        // Removido: publicação de relatório HTML inexistente
-
-        stage('Resultados no Console') {
+        stage('Publicar Relatório Cucumber') {
             steps {
-                echo "Testes executados. Veja a saída do console para os resultados do Cucumber."
+                publishHTML(target: [
+                    reportDir: 'target',
+                    reportFiles: 'cucumber-report.html',
+                    reportName: 'Relatório Cucumber',
+                    keepAll: true,
+                    alwaysLinkToLastBuild: true
+                ])
             }
         }
     }

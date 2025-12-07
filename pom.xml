@@ -31,7 +31,7 @@
             <version>5.7.0</version>
         </dependency>
 
-        <!-- Cucumber 7 -->
+        <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -52,12 +52,20 @@
             <scope>test</scope>
         </dependency>
 
+
+        <!-- Extent Reports -->
+        <dependency>
+            <groupId>com.aventstack</groupId>
+            <artifactId>extentreports</artifactId>
+            <version>5.1.1</version>
+        </dependency>
+
+
+
     </dependencies>
 
     <build>
         <plugins>
-
-            <!-- EXECUTAR O RUNNER NO JENKINS -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -66,10 +74,8 @@
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
-                    <testFailureIgnore>true</testFailureIgnore>
                 </configuration>
             </plugin>
-
         </plugins>
     </build>
 
