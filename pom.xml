@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0"
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
 
@@ -17,7 +17,7 @@
 
     <dependencies>
 
-        <!-- Cucumber Java -->
+        <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
@@ -25,7 +25,6 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Cucumber JUnit -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
@@ -55,7 +54,7 @@
             <version>5.9.2</version>
         </dependency>
 
-        <!-- Plugin de Relatório -->
+        <!-- Masterthought HTML Report -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
@@ -65,9 +64,10 @@
     </dependencies>
 
     <build>
+
         <plugins>
 
-            <!-- Executa APENAS classes Runner -->
+            <!-- EXECUTAR APENAS O RUNNER -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -76,11 +76,10 @@
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
-                    <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
 
-            <!-- Relatório HTML profissional -->
+            <!-- MASTERTHOUGHT REPORT -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
@@ -94,17 +93,22 @@
                         </goals>
                         <configuration>
                             <projectName>Automação SISGCORP</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
+
+                            <!-- AQUI ESTÁ O AJUSTE correto!!! -->
                             <jsonFiles>
-                                <!-- CORRIGIDO: caminho real onde o Runner salva o JSON -->
                                 <param>${project.build.directory}/cucumber-reports/cucumber.json</param>
                             </jsonFiles>
+
+                            <outputDirectory>
+                                ${project.build.directory}/cucumber-html-reports
+                            </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
         </plugins>
+
     </build>
 
 </project>
