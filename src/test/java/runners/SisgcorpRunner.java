@@ -10,10 +10,8 @@ import io.cucumber.junit.CucumberOptions;
         glue = {"steps", "utils"},
         plugin = {
                 "pretty",
-                // JSON necessário para o Jenkins gerar o relatório
                 "json:target/cucumber.json",
-                // Relatório HTML normal do Cucumber
-                "html:target/cucumber-html-report"
+                "html:target/cucumber-report.html"
         },
         monochrome = true
 )
