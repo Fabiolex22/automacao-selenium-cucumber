@@ -25,18 +25,12 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Cucumber JUnit (com exclusão do engine que estava quebrando o plugin) -->
+        <!-- Cucumber JUnit -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
             <version>7.18.0</version>
             <scope>test</scope>
-            <exclusions>
-                <exclusion>
-                    <groupId>io.cucumber</groupId>
-                    <artifactId>cucumber-junit-platform-engine</artifactId>
-                </exclusion>
-            </exclusions>
         </dependency>
 
         <!-- JUnit 4 -->
@@ -47,7 +41,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Selenium WebDriver -->
+        <!-- Selenium -->
         <dependency>
             <groupId>org.seleniumhq.selenium</groupId>
             <artifactId>selenium-java</artifactId>
@@ -61,7 +55,7 @@
             <version>5.9.2</version>
         </dependency>
 
-        <!-- Relatório HTML (Masterthought) -->
+        <!-- Plugin de Relatório -->
         <dependency>
             <groupId>net.masterthought</groupId>
             <artifactId>cucumber-reporting</artifactId>
@@ -73,7 +67,7 @@
     <build>
         <plugins>
 
-            <!-- Surefire: Executa SOMENTE seu Runner -->
+            <!-- Executa APENAS classes Runner -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -86,7 +80,7 @@
                 </configuration>
             </plugin>
 
-            <!-- Relatório HTML Profissional -->
+            <!-- Relatório HTML profissional -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
@@ -102,7 +96,8 @@
                             <projectName>Automação SISGCORP</projectName>
                             <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
                             <jsonFiles>
-                                <param>${project.build.directory}/cucumber.json</param>
+                                <!-- CORRIGIDO: caminho real onde o Runner salva o JSON -->
+                                <param>${project.build.directory}/cucumber-reports/cucumber.json</param>
                             </jsonFiles>
                         </configuration>
                     </execution>
