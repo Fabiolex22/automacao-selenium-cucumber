@@ -20,23 +20,12 @@ pipeline {
             }
         }
 
-        stage('Gerar Relatório HTML') {
-            steps {
-                bat "mvn verify"
-            }
-        }
+        // Removido: gerar relatório HTML (pois não existe mais no POM)
+        // Removido: publicação de relatório HTML inexistente
 
-        stage('Publicar Relatórios') {
+        stage('Resultados no Console') {
             steps {
-
-                // PUBLICAR O RELATÓRIO HTML DO CUCUMBER
-                publishHTML(target: [
-                    reportDir: 'target',
-                    reportFiles: 'cucumber-report.html',
-                    reportName: 'Relatório Cucumber',
-                    keepAll: true,
-                    alwaysLinkToLastBuild: true
-                ])
+                echo "Testes executados. Veja a saída do console para os resultados do Cucumber."
             }
         }
     }
