@@ -20,9 +20,15 @@ pipeline {
             }
         }
 
-        stage('Relatório Cucumber') {
+        stage('Publicar Relatório Cucumber') {
             steps {
                 cucumber fileIncludePattern: 'target/cucumber.json'
+            }
+        }
+
+        stage('Resultados no Console') {
+            steps {
+                echo "Testes executados. Veja os relatórios à esquerda."
             }
         }
     }
