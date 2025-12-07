@@ -10,8 +10,9 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>23</maven.compiler.source>
-        <maven.compiler.target>23</maven.compiler.target>
+        <!-- COMPATÍVEL COM O JDK 17 DO JENKINS -->
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -33,7 +34,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- Dependência complementar do Cucumber (evita alguns erros) -->
+        <!-- Dependência complementar do Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-core</artifactId>
@@ -41,7 +42,7 @@
             <scope>test</scope>
         </dependency>
 
-        <!-- JUnit 4 (obrigatório para @RunWith) -->
+        <!-- JUnit 4 -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -56,7 +57,7 @@
             <version>4.23.0</version>
         </dependency>
 
-        <!-- WebDriverManager (resolve drivers automaticamente) -->
+        <!-- WebDriverManager -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
@@ -68,7 +69,7 @@
     <build>
         <plugins>
 
-            <!-- Surefire: roda o Runner do Cucumber -->
+            <!-- Surefire para executar o Runner do Cucumber -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -77,8 +78,6 @@
                     <includes>
                         <include>**/*Runner.java</include>
                     </includes>
-
-                    <!-- Necessário para UTF-8 e evitar erros em features -->
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
             </plugin>
