@@ -20,15 +20,9 @@ pipeline {
             }
         }
 
-        stage('Publicar Relatório Cucumber') {
+        stage('Relatório Cucumber') {
             steps {
-                publishHTML(target: [
-                    reportDir: 'target',
-                    reportFiles: 'cucumber-report.html',
-                    reportName: 'Relatório Cucumber',
-                    keepAll: true,
-                    alwaysLinkToLastBuild: true
-                ])
+                cucumber fileIncludePattern: 'target/cucumber.json'
             }
         }
     }
