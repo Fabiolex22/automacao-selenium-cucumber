@@ -1,8 +1,8 @@
 package runners;
 
-import org.junit.runner.RunWith;
 import io.cucumber.junit.Cucumber;
 import io.cucumber.junit.CucumberOptions;
+import org.junit.runner.RunWith;
 
 @RunWith(Cucumber.class)
 @CucumberOptions(
@@ -10,11 +10,10 @@ import io.cucumber.junit.CucumberOptions;
         glue = {"steps", "support"},
         plugin = {
                 "pretty",
-                "json:target/cucumber-reports/cucumber.json",
-                "html:target/cucumber-reports/html-report"
+                "json:target/cucumber.json"
         },
-        monochrome = true,
-        snippets = CucumberOptions.SnippetType.CAMELCASE
+        monochrome = true
 )
 public class SisgcorpRunner {
+
 }

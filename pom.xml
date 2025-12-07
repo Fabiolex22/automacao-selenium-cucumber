@@ -17,98 +17,74 @@
 
     <dependencies>
 
+        <!-- Selenium -->
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-java</artifactId>
+            <version>4.24.0</version>
+        </dependency>
+
         <!-- Cucumber -->
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>7.18.0</version>
-            <scope>test</scope>
+            <version>7.18.1</version>
         </dependency>
 
         <dependency>
             <groupId>io.cucumber</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>7.18.0</version>
-            <scope>test</scope>
+            <version>7.18.1</version>
         </dependency>
 
-        <!-- JUnit 4 -->
-        <dependency>
-            <groupId>junit</groupId>
-            <artifactId>junit</artifactId>
-            <version>4.13.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <!-- Selenium -->
-        <dependency>
-            <groupId>org.seleniumhq.selenium</groupId>
-            <artifactId>selenium-java</artifactId>
-            <version>4.23.0</version>
-        </dependency>
-
-        <!-- WebDriverManager -->
+        <!-- WebDriver Manager (opcional, mas ajuda muito) -->
         <dependency>
             <groupId>io.github.bonigarcia</groupId>
             <artifactId>webdrivermanager</artifactId>
-            <version>5.9.2</version>
-        </dependency>
-
-        <!-- Masterthought HTML Report -->
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>cucumber-reporting</artifactId>
-            <version>5.7.0</version>
+            <version>5.8.0</version>
         </dependency>
 
     </dependencies>
 
     <build>
-
         <plugins>
 
-            <!-- EXECUTAR APENAS O RUNNER -->
+            <!-- Surefire (necessário para rodar o Runner) -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.2.5</version>
                 <configuration>
                     <includes>
-                        <include>**/*Runner.java</include>
+                        <include>**/*Runner*.java</include>
                     </includes>
                 </configuration>
             </plugin>
 
-            <!-- MASTERTHOUGHT REPORT -->
+            <!-- Plugin do relatório Cucumber -->
             <plugin>
                 <groupId>net.masterthought</groupId>
                 <artifactId>maven-cucumber-reporting</artifactId>
                 <version>5.7.0</version>
                 <executions>
                     <execution>
-                        <id>generate-cucumber-html-report</id>
+                        <id>report</id>
                         <phase>verify</phase>
                         <goals>
                             <goal>generate</goal>
                         </goals>
                         <configuration>
-                            <projectName>Automação SISGCORP</projectName>
-
-                            <!-- AQUI ESTÁ O AJUSTE correto!!! -->
+                            <projectName>Relatorio Cucumber</projectName>
+                            <outputDirectory>target</outputDirectory>
                             <jsonFiles>
-                                <param>${project.build.directory}/cucumber-reports/cucumber.json</param>
+                                <param>target/cucumber.json</param>
                             </jsonFiles>
-
-                            <outputDirectory>
-                                ${project.build.directory}/cucumber-html-reports
-                            </outputDirectory>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
 
         </plugins>
-
     </build>
 
 </project>
