@@ -64,19 +64,12 @@
             <version>5.9.2</version>
         </dependency>
 
-        <!-- Plugin de Relatório HTML -->
-        <dependency>
-            <groupId>net.masterthought</groupId>
-            <artifactId>cucumber-reporting</artifactId>
-            <version>5.7.0</version>
-        </dependency>
-
     </dependencies>
 
     <build>
         <plugins>
 
-            <!-- Runner do Cucumber via Surefire -->
+            <!-- Surefire para executar o Runner do Cucumber -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-surefire-plugin</artifactId>
@@ -86,39 +79,13 @@
                         <include>**/*Runner.java</include>
                     </includes>
 
-                    <!-- Gerar JSON automaticamente -->
+                    <!-- Gera o cucumber.json automaticamente -->
                     <systemPropertyVariables>
                         <cucumber.plugin>pretty, json:target/cucumber.json</cucumber.plugin>
                     </systemPropertyVariables>
 
                     <argLine>-Dfile.encoding=UTF-8</argLine>
                 </configuration>
-            </plugin>
-
-            <!-- Gerar Relatório HTML após os testes -->
-            <plugin>
-                <groupId>net.masterthought</groupId>
-                <artifactId>maven-cucumber-reporting</artifactId>
-                <version>5.7.0</version>
-                <executions>
-                    <execution>
-                        <id>generate-cucumber-html-report</id>
-
-                        <!-- FASE CORRETA PARA O JENKINS -->
-                        <phase>post-integration-test</phase>
-
-                        <goals>
-                            <goal>generate</goal>
-                        </goals>
-                        <configuration>
-                            <projectName>Automação SISGCORP</projectName>
-                            <outputDirectory>${project.build.directory}/cucumber-html-reports</outputDirectory>
-                            <jsonFiles>
-                                <param>${project.build.directory}/cucumber.json</param>
-                            </jsonFiles>
-                        </configuration>
-                    </execution>
-                </executions>
             </plugin>
 
         </plugins>
