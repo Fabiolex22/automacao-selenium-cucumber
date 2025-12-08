@@ -1,6 +1,6 @@
 # language: pt
 
-Funcionalidade: Login no SeuBarriga
+Funcionalidade: Teste Piloto Jankins
 
   Cenario: Login válido
     Dado que acesso o site SeuBarriga
